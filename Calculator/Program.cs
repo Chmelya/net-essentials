@@ -44,6 +44,7 @@ namespace Calculator
         static bool check(string s)
         {
             var buf = s.Split(',');
+
             if (buf.Length > 1)
                 if (buf[1].Length > 5)
                 {
@@ -52,9 +53,6 @@ namespace Calculator
 
             if (Math.Abs(Convert.ToDouble(buf[0])) > 10000)
                 return false;
-
-            //if (Math.Abs(Convert.ToDouble(s.Split('.')[0])) <= 10000 && s.Split('.')[1].Length <= 5)
-                //return true;
 
             return true;
         }
