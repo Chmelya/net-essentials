@@ -4,19 +4,19 @@ using System.Text;
 
 namespace FiguresLibrary
 {
-    public class Triangle: Shape
+    public class Rectangle: Shape
     {
         double a;
-        double h;
-        public Triangle(double a, double h) : base("Triangle")
+        double b;
+        public Rectangle(double a, double b) : base("Rectangle")
         {
             this.a = a;
-            this.h = h;
+            this.b = b;
         }
 
         public override double GetArea()
         {
-            return 0.5 * a * h;
+            return a * b;
         }
     }
 }
