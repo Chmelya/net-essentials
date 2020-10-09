@@ -28,7 +28,11 @@ namespace Tree
             if (n.Left != null) Find(n.Left);
             if (n.Right != null) Find(n.Right);
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 2d747092c6b4afbe5a7d6069d16ab2934ed9f969
 
         public Node this[int index]
         {
@@ -42,4 +46,8 @@ namespace Tree
 
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2d747092c6b4afbe5a7d6069d16ab2934ed9f969
