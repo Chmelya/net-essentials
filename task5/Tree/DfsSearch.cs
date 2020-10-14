@@ -6,48 +6,41 @@ namespace Tree
 {
     public class DfsSearch
     {
-        int count;
-        Dictionary<int, Node> byNum;
-        Dictionary<string, Node> byName;
+        private Dictionary<int, Node> DictionaryByNum { get; }
+        private Dictionary<string, Node> DictionaryByName { get; }
 
         public DfsSearch(Node tree)
         {
-            byName = new Dictionary<string, Node>();
-            byNum = new Dictionary<int, Node>();
-            count = 0;
-            Find(tree);
+            DictionaryByName = new Dictionary<string, Node>();
+            DictionaryByNum = new Dictionary<int, Node>();
+
+            FindNodeIndex(tree, 0);
         }
 
-        void Find(Node n)
+        void FindNodeIndex(Node n, int count)
         {
-            byNum.Add(count, n);
-            byName.Add(n.Val, n);
+            if (n == null)
+            {
+                return;
+            }
+
+            DictionaryByNum.Add(count, n);
+            DictionaryByName.Add(n.Val, n);
 
             count++;
 
-            if (n.Left != null) Find(n.Left);
-            if (n.Right != null) Find(n.Right);
+            if (n.Left != null) FindNodeIndex(n.Left, count);
+            if (n.Right != null) FindNodeIndex(n.Right, count);
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 2d747092c6b4afbe5a7d6069d16ab2934ed9f969
 
         public Node this[int index]
         {
-            get => byNum[index];
+            get => DictionaryByNum[index];
         }
 
         public Node this[string val]
         {
-
-            get => byName[val];
-
+            get => DictionaryByName[val];
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 2d747092c6b4afbe5a7d6069d16ab2934ed9f969

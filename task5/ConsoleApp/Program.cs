@@ -24,8 +24,4 @@ namespace ConsoleApp
             Console.WriteLine(dfs[4].Val);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 2d747092c6b4afbe5a7d6069d16ab2934ed9f969
