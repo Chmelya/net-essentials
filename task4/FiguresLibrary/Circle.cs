@@ -6,7 +6,7 @@ namespace FiguresLibrary
 {
     public class Circle: Shape
     {
-        double d;
+        public double d { get; }
         public Circle(double d) : base("Circle")
         {
             this.d = d;

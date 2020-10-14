@@ -6,8 +6,8 @@ namespace FiguresLibrary
 {
     public class Rectangle: Shape
     {
-        double a;
-        double b;
+        public double a { get; }
+        public double b { get; }
         public Rectangle(double a, double b) : base("Rectangle")
         {
             this.a = a;

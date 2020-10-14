@@ -8,5 +8,4 @@ namespace FiguresLibrary
     {
         double Calculate(IEnumerable<Shape> shapes); // returns a sum of all shapes areas
     }
-
 }

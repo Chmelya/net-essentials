@@ -6,8 +6,8 @@ namespace FiguresLibrary
 {
     public class Triangle: Shape
     {
-        double a;
-        double h;
+        public double a { get; }
+        public double h { get; }
         public Triangle(double a, double h) : base("Triangle")
         {
             this.a = a;
