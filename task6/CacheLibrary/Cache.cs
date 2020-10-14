@@ -8,50 +8,53 @@ namespace CacheLibrary
         where TKey : struct
         where TValue : class
     {
-        Dictionary<TKey, TValue> cacheVal;
-        Dictionary<TKey, DateTime> cacheTime;
+        
+        List<CacheItem<TKey, TValue>> cacheList;
 
         public Cache()
         {
-            cacheVal = new Dictionary<TKey, TValue>();
-            cacheTime = new Dictionary<TKey, DateTime>();
+            cacheList = new List<CacheItem<TKey, TValue>>();
         }
 
         public void AddOrUpdate(TKey key, TValue value, DateTime expiresOn)
         {
-            if (cacheVal.ContainsKey(key))
+            for (int i = cacheList.Count - 1; i >= 0; i--)
             {
-                cacheVal[key] = value;
-                cacheTime[key] = expiresOn;
+                if (cacheList[i].Key.Equals(key))
+                {
+                    cacheList.Remove(cacheList[i]);
+                    break;
+                }
             }
-            else
-            {
-                cacheVal.Add(key, value);
-                cacheTime.Add(key, expiresOn);
-            }
+
+            cacheList.Add(new CacheItem<TKey, TValue>(key, value, expiresOn));
         }
 
         public TValue Get(TKey key)
         {
-            if (cacheVal.ContainsKey(key))
-                if (cacheVal[key] == null)
-                    return null;
+            foreach (var item in cacheList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    return item.Time > DateTime.Now ? item.Value : null;
+                }
+            }
 
-            if (DateTime.Now > cacheTime[key])
-                return null;
-
-            return cacheVal[key];
+            return null;
         }
 
         public bool Remove(TKey key)
         {
-            if (!cacheVal.ContainsKey(key))
-                return false;
+            for (int i = cacheList.Count - 1; i >= 0; i--)
+            {
+                if (cacheList[i].Key.Equals(key))
+                {
+                    cacheList.Remove(cacheList[i]);
+                    return true;
+                }
+            }
 
-            cacheVal.Remove(key);
-            cacheTime.Remove(key);
-
-            return true;
+            return false;
         }
     }
 }

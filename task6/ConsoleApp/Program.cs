@@ -13,7 +13,7 @@ namespace ConsoleApp
 
             cache.AddOrUpdate(2, "world", DateTime.Now.AddHours(2));
 
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(2000);
 
             var getA = cache.Get(1); //null
             var getB = cache.Get(2); //world
@@ -21,7 +21,6 @@ namespace ConsoleApp
 
             cache.AddOrUpdate(1, "!", DateTime.Now.AddDays(1));
             var getC = cache.Get(1); // !
-            Console.WriteLine(getC);
         }
     }
 }
