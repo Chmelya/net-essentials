@@ -5,16 +5,18 @@ namespace MoneyLib
     public class Money
     {
         public decimal Amount { get; }
-        Currencies Currency { get; }
+        decimal AmountGeneral;
+        Currencies currency;
 
         public Money(decimal Amount, Currencies currency)
         {
 
             this.Amount = Amount;
-            this.Currency = currency;
+            this.AmountGeneral = Amount * ConvertCoefficent(currency);
+            this.currency = currency;
         }
 
-        private static decimal ConvertCoefficient(Currencies cur)
+        static decimal ConvertCoefficent(Currencies cur)
         {
             switch (cur)
             {
@@ -27,63 +29,68 @@ namespace MoneyLib
 
         public static Money operator +(Money m1, Money m2)
         {
-            var resultAmount = m1.Amount + m2.Amount * ConvertCoefficient(m2.Currency) / ConvertCoefficient(m1.Currency);
-            return new Money(resultAmount, m1.Currency);
+            if (m1.currency == m2.currency)
+                return new Money(m1.Amount + m2.Amount, m1.currency);
+            else
+                return new Money((m1.AmountGeneral + m2.AmountGeneral) / ConvertCoefficent(m1.currency), m1.currency);
         }
 
         public static Money operator -(Money m1, Money m2)
         {
-            var resultAmount = m1.Amount - m2.Amount * ConvertCoefficient(m2.Currency) / ConvertCoefficient(m1.Currency);
-            return new Money(resultAmount, m1.Currency);
+            if (m1.currency == m2.currency)
+                return new Money(m1.Amount - m2.Amount, m1.currency);
+            else
+                return new Money((m1.AmountGeneral - m2.AmountGeneral) / ConvertCoefficent(m1.currency), m1.currency);
         }
 
         public static Money operator ++(Money m)
         {
-            switch (m.Currency)
+            switch (m.currency)
             {
                 case Currencies.BYN:
-                    return new Money(m.Amount * 1.3m, m.Currency);
+                    return new Money(m.Amount * 1.3m, m.currency);
                 case Currencies.USD:
-                    return new Money(m.Amount * 1.1m, m.Currency);
+                    return new Money(m.Amount * 1.1m, m.currency);
                 case Currencies.EUR:
-                    return new Money(m.Amount * 1.2m, m.Currency);
+                    return new Money(m.Amount * 1.2m, m.currency);
                 default: throw new Exception();
             }
         }
 
         public static bool operator ==(Money m1, Money m2)
         {
-            return m1.Amount * ConvertCoefficient(m1.Currency) == m2.Amount * ConvertCoefficient(m2.Currency);
+            return m1.AmountGeneral == m2.AmountGeneral;
         }
 
         public static bool operator !=(Money m1, Money m2)
         {
-            return m1.Amount * ConvertCoefficient(m1.Currency) != m2.Amount * ConvertCoefficient(m2.Currency);
+            return m1.AmountGeneral != m2.AmountGeneral;
         }
 
         public static explicit operator string(Money m)
         {
-            return $"{m.Amount:f5}_{m.Currency}";
+            return new string($"{m.Amount:f5}_{m.currency}");
         }
 
         public static implicit operator int(Money m)
         {
-            return (int)Math.Round(m.Amount * ConvertCoefficient(m.Currency));
+            return (int)Math.Round(m.AmountGeneral);
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is Money m)
+            Money m = obj as Money;
+            if (obj as Money == null)
             {
-                return Amount == m.Amount && Currency == m.Currency;
+                return false;
             }
 
-            return false;
+            return Amount == m.Amount && currency == m.currency;
         }
 
         public override int GetHashCode()
         {
-            return Amount.GetHashCode() + (int)Currency;
+            return Amount.GetHashCode() + (int)currency;
         }
     }
 }
