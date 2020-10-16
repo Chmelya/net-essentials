@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FiguresLibrary
 {
     public class Circle: Shape
     {
-        public double d { get; }
-        public Circle(double d) : base("Circle")
+        public double diameter { get; }
+        public Circle(double diameter) : base("Circle")
         {
-            this.d = d;
+            this.diameter = diameter;
         }
 
         public override double GetArea()
         {
-            return Math.PI * (d / 2) * (d / 2);
+            return Math.PI * (diameter / 2) * (diameter / 2);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FiguresLibrary
+﻿namespace FiguresLibrary
 {
     public abstract class Shape
     {

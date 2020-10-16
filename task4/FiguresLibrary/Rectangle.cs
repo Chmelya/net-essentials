@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FiguresLibrary
+﻿namespace FiguresLibrary
 {
     public class Rectangle: Shape
     {
-        public double a { get; }
-        public double b { get; }
-        public Rectangle(double a, double b) : base("Rectangle")
+        public double width { get; }
+        public double height { get; }
+        public Rectangle(double width, double height) : base("Rectangle")
         {
-            this.a = a;
-            this.b = b;
+            this.width = width;
+            this.height = height;
         }
 
         public override double GetArea()
         {
-            return a * b;
+            return width * height;
         }
     }
 }

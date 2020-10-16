@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FiguresLibrary
+﻿namespace FiguresLibrary
 {
     public class Triangle: Shape
     {
-        public double a { get; }
-        public double h { get; }
-        public Triangle(double a, double h) : base("Triangle")
+        public double side { get; }
+        public double height { get; }
+        public Triangle(double side, double height) : base("Triangle")
         {
-            this.a = a;
-            this.h = h;
+            this.side = side;
+            this.height = height;
         }
 
         public override double GetArea()
         {
-            return 0.5 * a * h;
+            return 0.5 * side * height;
         }
     }
 }
