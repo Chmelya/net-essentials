@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyLib", "..\MoneyLib\MoneyLib.csproj", "{8E5A9A4F-1820-4BFE-AF27-73595010C07C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "..\ConsoleTest\ConsoleTest.csproj", "{337178BB-D7C5-4CCC-BB3C-75B1402AC31C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E5A9A4F-1820-4BFE-AF27-73595010C07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5A9A4F-1820-4BFE-AF27-73595010C07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5A9A4F-1820-4BFE-AF27-73595010C07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5A9A4F-1820-4BFE-AF27-73595010C07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337178BB-D7C5-4CCC-BB3C-75B1402AC31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337178BB-D7C5-4CCC-BB3C-75B1402AC31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337178BB-D7C5-4CCC-BB3C-75B1402AC31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337178BB-D7C5-4CCC-BB3C-75B1402AC31C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66276E8A-F993-4D00-8859-E9EDBA7AAF81}
+	EndGlobalSection
+EndGlobal
