@@ -7,7 +7,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Cache<double, string> cache = new Cache<double, string>();
+            ICache<double, string> cache = new Cache<double, string>();
 
             cache.AddOrUpdate(1, "hello", DateTime.Now.AddSeconds(5));
 

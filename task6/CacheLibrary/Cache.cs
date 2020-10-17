@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace CacheLibrary
 {
@@ -27,17 +27,23 @@ namespace CacheLibrary
                 }
             }
 
+            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+
+            foreach (var item in selectedItem)
+            {
+                cacheList.Remove(item);
+            }
+
             cacheList.Add(new CacheItem<TKey, TValue>(key, value, expiresOn));
         }
 
         public TValue Get(TKey key)
         {
-            foreach (var item in cacheList)
+            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+
+            foreach (var item in selectedItem)
             {
-                if (item.Key.Equals(key))
-                {
-                    return item.Time > DateTime.Now ? item.Value : null;
-                }
+                return item.Time > DateTime.Now ? item.Value : null;
             }
 
             return null;
@@ -45,13 +51,12 @@ namespace CacheLibrary
 
         public bool Remove(TKey key)
         {
-            for (int i = cacheList.Count - 1; i >= 0; i--)
+            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+
+            foreach (var item in selectedItem)
             {
-                if (cacheList[i].Key.Equals(key))
-                {
-                    cacheList.Remove(cacheList[i]);
-                    return true;
-                }
+                cacheList.Remove(item);
+                return true;
             }
 
             return false;
