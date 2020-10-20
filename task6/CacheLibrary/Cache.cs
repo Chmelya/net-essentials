@@ -27,23 +27,20 @@ namespace CacheLibrary
                 }
             }
 
-            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+            var selectedItem = cacheList.FirstOrDefault(i => i.Key.Equals(key));
 
-            foreach (var item in selectedItem)
-            {
-                cacheList.Remove(item);
-            }
-
+            cacheList.Remove(selectedItem);
+            
             cacheList.Add(new CacheItem<TKey, TValue>(key, value, expiresOn));
         }
 
         public TValue Get(TKey key)
         {
-            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+            var selectedItem = cacheList.FirstOrDefault(i => i.Key.Equals(key));
 
-            foreach (var item in selectedItem)
+            if (selectedItem.Time > DateTime.Now)
             {
-                return item.Time > DateTime.Now ? item.Value : null;
+                return selectedItem.Value;
             }
 
             return null;
@@ -51,11 +48,10 @@ namespace CacheLibrary
 
         public bool Remove(TKey key)
         {
-            var selectedItem = from item in cacheList where item.Key.Equals(key) select item;
+            var selectedItem = cacheList.FirstOrDefault(i => i.Key.Equals(key));
 
-            foreach (var item in selectedItem)
+            if (cacheList.Remove(selectedItem))
             {
-                cacheList.Remove(item);
                 return true;
             }
 
