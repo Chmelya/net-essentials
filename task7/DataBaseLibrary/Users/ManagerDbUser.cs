@@ -10,7 +10,7 @@
         public void UseDatabase(IReadUpdateDatabase db)
         {
             db.ReadData();
-            db.UpdateData(data => data += "a");
+            db.UpdateData(data => data += "manager");
         }
     }
 }

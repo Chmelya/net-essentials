@@ -15,7 +15,6 @@ namespace ExampleOfLibrary
 
             var admin = new AdminDbUser();
             admin.UseDatabase(new Database());
-
         }
     }
 }

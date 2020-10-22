@@ -6,6 +6,6 @@ namespace DataBaseLibrary
     {
         public string ReadData();
         public void WriteData(string data);
-        public void UpdateData(Action<string> update);
+        public void UpdateData(Func<string, string> update);
     }
 }

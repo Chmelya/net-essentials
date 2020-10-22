@@ -7,24 +7,26 @@ namespace DataBaseLibrary
     public class Database : IDatabase, IReadDatabase, IReadUpdateDatabase, IReadUpdateWriteDatabase
     {
         public string Shema { get; }
-        private string Data { get; set; }
+        private string _data;
 
         public Database()
         {
-            Data = String.Empty;    
+            _data = String.Empty;    
         }
 
         public string ReadData()
         {
-            return Data;
+            Console.WriteLine(_data);
+            return _data;
         }
         public void WriteData(string data)
         {
-            Data += data;
+            _data = data;
+            Console.WriteLine(_data);
         }
-        public void UpdateData(Action<string> update)
+        public void UpdateData(Func<string, string> update)
         {
-            update.Invoke(Data);
+            _data = update?.Invoke(_data);
         }
     }
 }

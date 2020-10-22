@@ -9,8 +9,8 @@
         public void UseDatabase(IReadUpdateWriteDatabase db)
         {
             db.ReadData();
-            db.UpdateData(data => data += "a");
-            db.WriteData("string_data"); 
+            db.UpdateData(data => data += "admin");
+            db.WriteData("admin write"); 
         }
     }
 }
