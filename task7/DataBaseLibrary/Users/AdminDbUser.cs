@@ -1,16 +1,14 @@
-﻿namespace DataBaseLibrary
+﻿using System;
+
+namespace DataBaseLibrary
 {
     public class AdminDbUser : IDbUser<IReadUpdateWriteDatabase>
     {
-        public AdminDbUser()
+        public string UseDatabase(IReadUpdateWriteDatabase db)
         {
-
-        }
-        public void UseDatabase(IReadUpdateWriteDatabase db)
-        {
-            db.ReadData();
-            db.UpdateData(data => data += "admin");
-            db.WriteData("admin write"); 
+            db.UpdateData(data => data += "admin update");
+            db.WriteData("admin write");
+            return db.ReadData();
         }
     }
 }

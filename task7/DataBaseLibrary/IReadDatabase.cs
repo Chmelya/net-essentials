@@ -6,6 +6,6 @@ namespace DataBaseLibrary
 {
     public interface IReadDatabase : IDatabase
     {
-        public string ReadData();
+
     }
 }

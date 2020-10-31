@@ -3,6 +3,6 @@
     public interface IDbUser<T> 
         where T : IDatabase
     {
-        void UseDatabase(T db);
+        string UseDatabase(T db);
     }
 }

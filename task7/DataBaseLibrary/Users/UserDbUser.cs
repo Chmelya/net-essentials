@@ -1,14 +1,12 @@
-﻿namespace DataBaseLibrary
+﻿using System;
+
+namespace DataBaseLibrary
 {
     public class UserDbUser : IDbUser<IReadDatabase>
     {
-        public UserDbUser()
+        public string UseDatabase(IReadDatabase db)
         {
-
-        }
-        public void UseDatabase(IReadDatabase db)
-        {
-            db.ReadData();
+            return db.ReadData();
         }
     }
 }

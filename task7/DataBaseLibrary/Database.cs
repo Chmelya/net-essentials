@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataBaseLibrary
 {
@@ -16,13 +14,11 @@ namespace DataBaseLibrary
 
         public string ReadData()
         {
-            Console.WriteLine(_data);
             return _data;
         }
         public void WriteData(string data)
         {
             _data = data;
-            Console.WriteLine(_data);
         }
         public void UpdateData(Func<string, string> update)
         {
