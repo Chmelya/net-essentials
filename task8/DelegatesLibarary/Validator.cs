@@ -4,7 +4,7 @@ namespace DelegatesLibarary
 {
     public class Validator<T>: IValidator<T>
     {
-        private List<ValidationRule<T>> _rules;
+        public readonly List<ValidationRule<T>> _rules;
 
         public Validator(List<ValidationRule<T>> rules)
         {
