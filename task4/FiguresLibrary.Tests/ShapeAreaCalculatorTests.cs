@@ -1,10 +1,10 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using FiguresLibrary;
 using System.Collections.Generic;
 
 namespace FiguresLibrary.Tests
 {
-    public class Tests
+    class ShapeAreaCalculatorTests
     {
         private IShapeAreaCalculator areaCalculator;
         Triangle triangle;
@@ -15,33 +15,6 @@ namespace FiguresLibrary.Tests
         public void Setup()
         {
             areaCalculator = new ShapeAreaCalculator();
-        }
-
-        [TestCase(2, 4)]
-        [TestCase(4, 5)]
-        public void triangleName(double side, double height)
-        {
-            triangle = new Triangle(side, height);
-
-            Assert.AreEqual("Triangle", triangle.Name);
-        }
-
-        [TestCase(2)]
-        [TestCase(4)]
-        public void circleName(double diamter)
-        {
-           circle = new Circle(diamter);
-
-            Assert.AreEqual("Circle", circle.Name);
-        }
-
-        [TestCase(2, 4)]
-        [TestCase(4, 5)]
-        public void reactangleName(double side, double height)
-        {
-            rectangle = new Rectangle(side, height);
-
-            Assert.AreEqual("Rectangle", rectangle.Name);
         }
 
         [TestCase(2, 4)]
@@ -91,9 +64,7 @@ namespace FiguresLibrary.Tests
                 rectangle
             };
 
-            var areaSum = triangle.GetArea() + circle.GetArea() + rectangle.GetArea();
-            
-            Assert.AreEqual(areaSum, areaCalculator.Calculate(shapes));
+            Assert.AreEqual(12 + System.Math.PI, areaCalculator.Calculate(shapes));
         }
     }
 }
