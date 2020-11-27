@@ -7,7 +7,7 @@ namespace CacheLibrary.Tests
 {
     public class CacheTests
     {
-        ICache<double, string> cache;
+        private ICache<double, string> cache;
          
         [SetUp]
         public void Setup()
@@ -16,7 +16,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void AddOrUpdate_AddedItemDoesNotExistInCache_ShouldAddNewItem()
+        public void AddOrUpdate_AddedItemDoesNotExistsInCache_ShouldAddNewItem()
         {
             cache.AddOrUpdate(1, "hello", DateTime.Now.AddSeconds(5));
 
@@ -24,7 +24,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void AddOrUpdate_AddedItemExistInCache_ShouldUpdateItem()
+        public void AddOrUpdate_AddedItemExistsInCache_ShouldUpdateItem()
         {
             cache.AddOrUpdate(2, "hello", DateTime.Now.AddSeconds(5));
             cache.AddOrUpdate(2, "hell", DateTime.Now.AddSeconds(5));
@@ -33,7 +33,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void RemoveItem_ItemExistInCache_ShouldReturnFalse()
+        public void RemoveItem_ItemExistsInCache_ShouldReturnFalse()
         {
             cache.AddOrUpdate(3, "world", DateTime.Now.AddSeconds(5));
 
@@ -41,7 +41,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void RemoveItem_ItemExistInCache_ShouldReturnTrue()
+        public void RemoveItem_ItemExistsInCache_ShouldReturnTrue()
         {
             cache.AddOrUpdate(5, "world", DateTime.Now.AddSeconds(5));
 
@@ -49,7 +49,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void GetItem_ItemExistInCache_ShouldReturnItem()
+        public void GetItem_ItemExistsInCache_ShouldReturnItem()
         {
             cache.AddOrUpdate(6, "six", DateTime.Now.AddSeconds(5));
 
