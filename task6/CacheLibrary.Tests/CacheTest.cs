@@ -33,7 +33,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void RemoveItem_ItemExistsInCache_ShouldReturnFalse()
+        public void RemoveItem_ItemDoesNotExist_ShouldReturnFalse()
         {
             cache.AddOrUpdate(3, "world", DateTime.Now.AddSeconds(5));
 
@@ -57,7 +57,7 @@ namespace CacheLibrary.Tests
         }
 
         [Test]
-        public void GetItem_ItemExpired_ShouldNotReturnItem()
+        public void GetItem_ItemExpired_ShoulReturnNull()
         {
             cache.AddOrUpdate(7, "seven", DateTime.Now.AddSeconds(1));
 
