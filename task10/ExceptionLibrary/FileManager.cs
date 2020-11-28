@@ -6,7 +6,7 @@ using System.Text;
 namespace ExceptionLibrary
 {
     [Serializable]
-    public static class Example
+    public static class FileManager
     {
         public static void ReadAll(FileStream fileStream)
         {

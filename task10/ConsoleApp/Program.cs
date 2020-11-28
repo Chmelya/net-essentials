@@ -12,7 +12,7 @@ namespace ConsoleApp
 
             try
             {
-                Example.CreateTxtFile("file");
+                FileManager.CreateTxtFile("file");
             }
             catch(FileReadWriteException)
             {
@@ -24,7 +24,7 @@ namespace ConsoleApp
             
             try
             {
-                Example.ReadAll(fileStream);
+                FileManager.ReadAll(fileStream);
             }
             catch(FileReadWriteException)
             {
