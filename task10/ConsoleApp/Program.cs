@@ -8,31 +8,34 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            FileStream fileStream;
+            FileStream fileStream = null;
 
             try
             {
-                FileManager.CreateTxtFile("file");
-            }
-            catch(FileReadWriteException)
-            {
-                Console.WriteLine("File not created");
-            }
+                FileManager.CreateTxtFile("file.txt");
 
+                fileStream = new FileStream("file.txt", FileMode.OpenOrCreate);
 
-            fileStream = null;
-            
-            try
-            {
                 FileManager.ReadAll(fileStream);
             }
-            catch(FileReadWriteException)
+            catch (FileWriteException ex)
             {
-                fileStream = new FileStream("file.txt", FileMode.OpenOrCreate);
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+            catch (FileReadException ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+            catch
+            {
+                throw;
             }
             finally
             {
-                fileStream.Close();
+                if (fileStream != null)
+                {
+                    fileStream.Close();
+                }
             }
         }
     }
