@@ -1,15 +1,22 @@
 ﻿using NUnit.Framework;
 using FiguresLibrary;
 using System.Collections.Generic;
+using System;
 
 namespace FiguresLibrary.Tests
 {
     class ShapeAreaCalculatorTests
     {
         private IShapeAreaCalculator areaCalculator;
-        Triangle triangle;
-        Rectangle rectangle;
-        Circle circle;
+
+        private static object[] shapesGetAreaCases =
+        {
+            new object[] { new Triangle(2, 3), 3 },
+            new object[] { new Triangle(4, 5), 10 },
+            new object[] { new Rectangle(4, 2), 8 },
+            new object[] { new Rectangle(5, 6), 30 },
+            new object[] { new Circle(2), Math.PI }
+        };
 
         [SetUp]
         public void Setup()
@@ -17,51 +24,21 @@ namespace FiguresLibrary.Tests
             areaCalculator = new ShapeAreaCalculator();
         }
 
-        [TestCase(2, 4)]
-        [TestCase(4, 5)]
-        public void triangleArea(double side, double height)
+        [TestCaseSource("shapesGetAreaCases")]
+        public void GetArea_ProvidedDifferentShapeTypes_ReturnsCorrectArea(Shape shape, double expectedArea)
         {
-            triangle = new Triangle(side, height);
-
-            var testValue = 0.5 * side * height;
-
-            Assert.AreEqual(testValue, triangle.GetArea());
-        }
-
-        [TestCase(4, 2)]
-        [TestCase(5, 6)]
-        public void rectangleArea(double side, double height)
-        {
-            rectangle = new Rectangle(side, height);
-
-            var testValue = side * height;
-
-            Assert.AreEqual(testValue, rectangle.GetArea());
-        }
-
-        [TestCase(4)]
-        [TestCase(5)]
-        public void circleleArea(double diameter)
-        {
-            circle = new Circle(diameter);
-
-            var testValue = System.Math.PI * (diameter / 2) * (diameter / 2); ;
-
-            Assert.AreEqual(testValue, circle.GetArea());
+            Assert.AreEqual(expectedArea, shape.GetArea());
         }
 
         [Test]
-        public void calculateArea()
+        public void Calculate_MultipleShapesProvided_ReturnsCorrectArea()
         {
-            triangle = new Triangle(4, 3);
-            circle = new Circle(2);
-            rectangle = new Rectangle(3, 2);
-
+            
             var shapes = new List<Shape>
-            {
-                triangle,
-                circle,
-                rectangle
+            { 
+                new Triangle(4, 3),
+                new Circle(2),
+                new Rectangle(3, 2)
             };
 
             Assert.AreEqual(12 + System.Math.PI, areaCalculator.Calculate(shapes));
