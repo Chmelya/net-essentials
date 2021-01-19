@@ -20,7 +20,7 @@ namespace TaskLibrary
 
                     Console.WriteLine($"Thread:{Thread.CurrentThread.ManagedThreadId}. IterationsMax: {iterationsMax}. IterationCurrent: {i}");
 
-                    Task.Delay(new Random().Next(200, 300));
+                    Task.Delay(iterationsMax);
                 }
             },
             ct);
