@@ -10,20 +10,25 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            TaskLibarayTestAsync().GetAwaiter().GetResult();
+        }
+
+        static async Task TaskLibarayTestAsync()
+        {
             List<Task> tasks;
             var tokenSource = new CancellationTokenSource(2000);
             var token = tokenSource.Token;
 
-            //TaskCreater.CreateTask();
+            await TaskCreater.CreateTask();
 
-            //TaskCreater.CreateTask(token);
+            await TaskCreater.CreateTask(token);
 
-            //tasks = new List<Task>();
-            //for(int i = 0; i < 10; i++)
-            //{
-            //    tasks.Add(TaskCreater.CreateTask(token));
-            //}
-            //Task.WaitAll(tasks.ToArray());
+            tasks = new List<Task>();
+            for (int i = 0; i < 10; i++)
+            {
+                tasks.Add(TaskCreater.CreateTask(token));
+            }
+            await Task.WhenAll(tasks.ToArray());
 
 
             tokenSource = new CancellationTokenSource();
@@ -33,10 +38,8 @@ namespace ConsoleApp
             {
                 tasks.Add(TaskCreater.CreateTask(token));
             }
-            Task.WaitAny(tasks.ToArray());
+            await Task.WhenAny(tasks.ToArray());
             tokenSource.Cancel();
-
-            Console.ReadKey();
         }
     }
 }

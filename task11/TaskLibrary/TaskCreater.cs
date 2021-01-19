@@ -6,9 +6,9 @@ namespace TaskLibrary
 {
     public class TaskCreater
     {
+        static int iterationsMax = new Random().Next(5, 30);
         public static Task CreateTask(CancellationToken ct = default)
         {
-            int iterationsMax = new Random().Next(5, 30);
             return Task.Run(() => {
                 
                 for (int i = 1; i <= iterationsMax; i++)
