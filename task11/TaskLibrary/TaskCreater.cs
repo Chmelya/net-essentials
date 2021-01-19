@@ -9,7 +9,7 @@ namespace TaskLibrary
         static int iterationsMax = new Random().Next(5, 30);
         public static Task CreateTask(CancellationToken ct = default)
         {
-            return Task.Run(() => {
+            return Task.Run(async () => {
                 
                 for (int i = 1; i <= iterationsMax; i++)
                 {
@@ -20,7 +20,7 @@ namespace TaskLibrary
 
                     Console.WriteLine($"Thread:{Thread.CurrentThread.ManagedThreadId}. IterationsMax: {iterationsMax}. IterationCurrent: {i}");
 
-                    Task.Delay(iterationsMax);
+                    await Task.Delay(iterationsMax);
                 }
             },
             ct);
