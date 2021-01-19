@@ -8,38 +8,66 @@ namespace ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            TaskLibarayTestAsync().GetAwaiter().GetResult();
-        }
+            List<Task> tasks = new List<Task>();
+            CancellationTokenSource tokenSource;
+            CancellationToken token;
 
-        static async Task TaskLibarayTestAsync()
-        {
-            List<Task> tasks;
-            var tokenSource = new CancellationTokenSource(2000);
-            var token = tokenSource.Token;
-
-            await TaskCreater.CreateTask();
-
-            await TaskCreater.CreateTask(token);
-
-            tasks = new List<Task>();
-            for (int i = 0; i < 10; i++)
+            try
             {
-                tasks.Add(TaskCreater.CreateTask(token));
+                await TaskCreator.CreateTask();
             }
-            await Task.WhenAll(tasks.ToArray());
-
-
-            tokenSource = new CancellationTokenSource();
-            token = tokenSource.Token;
-            tasks = new List<Task>();
-            for (int i = 0; i < 10; i++)
+            catch (System.Threading.Tasks.TaskCanceledException)
             {
-                tasks.Add(TaskCreater.CreateTask(token));
+
             }
-            await Task.WhenAny(tasks.ToArray());
-            tokenSource.Cancel();
+
+            try
+            {
+                tokenSource = new CancellationTokenSource(2000);
+                token = tokenSource.Token;
+                await TaskCreator.CreateTask(token);
+            }
+            catch (System.Threading.Tasks.TaskCanceledException)
+            {
+
+            }
+
+            try
+            {
+                tokenSource = new CancellationTokenSource(2000);
+                token = tokenSource.Token;
+                for (int i = 0; i < 10; i++)
+                {
+                    tasks.Add(TaskCreator.CreateTask(token));
+                }
+                await Task.WhenAll(tasks);
+            }
+            catch (AggregateException ae)
+            {
+
+            }
+            finally
+            {
+                tasks.Clear();
+            }
+
+            try
+            {
+                tokenSource = new CancellationTokenSource();
+                token = tokenSource.Token;
+                for (int i = 0; i < 10; i++)
+                {
+                    tasks.Add(TaskCreator.CreateTask(token));
+                }
+                await Task.WhenAny(tasks);
+                tokenSource.Cancel();
+            }
+            catch (AggregateException ae)
+            {
+
+            }
         }
     }
 }

@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 
 namespace TaskLibrary
 {
-    public class TaskCreater
+    public class TaskCreator
     {
-        static int iterationsMax = new Random().Next(5, 30);
+        private static Random rand = new Random();
         public static Task CreateTask(CancellationToken ct = default)
         {
+            int iterationsMax = rand.Next(5, 30);
             return Task.Run(async () => {
                 
                 for (int i = 1; i <= iterationsMax; i++)
@@ -18,12 +19,11 @@ namespace TaskLibrary
                         break;
                     }
 
+                    await Task.Delay(rand.Next(200, 300));
+                    
                     Console.WriteLine($"Thread:{Thread.CurrentThread.ManagedThreadId}. IterationsMax: {iterationsMax}. IterationCurrent: {i}");
-
-                    await Task.Delay(iterationsMax);
                 }
-            },
-            ct);
+            });
         }
     }
 }
